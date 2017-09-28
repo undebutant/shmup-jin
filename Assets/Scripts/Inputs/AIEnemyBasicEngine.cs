@@ -25,8 +25,6 @@ public class AIEnemyBasicEngine : MonoBehaviour {
 
 
     void Update () {
-        if(transform.position.x == 0) {
-            Destroy(this.gameObject);
-        }
+
 	}
 }

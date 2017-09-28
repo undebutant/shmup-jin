@@ -8,4 +8,5 @@ See [this page](http://www.ensiie.fr/~guillaume.bouyer/JIN/GPFGEA/Schmup%202017-
 ## ToDo list ##
 
 * Complete the specifications
+* Add boundaries and destroy by oob method
 * Add dash movement
