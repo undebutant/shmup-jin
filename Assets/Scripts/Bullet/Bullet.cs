@@ -42,17 +42,4 @@ public class Bullet : MonoBehaviour {
 
     // Init method called on start
     public virtual void Init(float damage, Vector2 speed) {}
-
-
-    void Update() {
-        UpdatePosition();
-
-        // Destroy the bullet whenever the sprite goes outside the playable area
-        if (transform.position.x < 0 || transform.position.y > 40) {
-            Destroy(this.gameObject);
-        }
-        else if(!GetComponent<SpriteRenderer>().enabled) {
-            Destroy(this.gameObject);
-        }
-    }
 }

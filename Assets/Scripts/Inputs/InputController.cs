@@ -9,7 +9,7 @@ public class InputController : MonoBehaviour {
     private GameObject playerShip = null;
 
 
-	void Start () {
+    void Start () {
         playerShip = GameObject.FindWithTag("Player");
 	}
 
@@ -24,8 +24,7 @@ public class InputController : MonoBehaviour {
         }
 
         
-        // Fetching shooting inputs from the player
-        bool isPlayerShooting = Input.GetButton("Fire1");
+        // Fetching shot swap input from the player
         bool isPlayerSwappingWeapon = Input.GetButtonDown("Fire2");
 
 
@@ -35,7 +34,9 @@ public class InputController : MonoBehaviour {
             playerShip.GetComponent<Engines>().Speed = playerMovements;
 
             // Handling shoots from the player
-            // TODO
+            if (Input.GetButton("Fire1")) {
+                playerShip.GetComponentInChildren<BulletGun>().Fire();
+            }
         }
     }
 }

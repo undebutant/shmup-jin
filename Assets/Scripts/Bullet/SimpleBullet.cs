@@ -19,4 +19,16 @@ public class SimpleBullet : Bullet {
         BulletDamage = damage;
         BulletSpeed = speed;
     }
+
+    void Update() {
+        UpdatePosition();
+
+        // Destroy the bullet whenever the sprite goes outside the playable area
+        if (transform.position.x < 0 || transform.position.x > 40) {
+            Destroy(this.gameObject);
+        }
+        else if (!GetComponent<SpriteRenderer>().enabled) {
+            Destroy(this.gameObject);
+        }
+    }
 }

@@ -28,6 +28,6 @@ public class SceneryMove : MonoBehaviour {
         float newPosition = Mathf.Repeat(currentPositionX + Time.deltaTime * scrollSpeed, lengthTile);
         currentPositionX = newPosition;
 
-        transform.position = startPosition + Vector3.left * newPosition;
+        transform.position = startPosition + Vector3.left * currentPositionX;
 	}
 }
