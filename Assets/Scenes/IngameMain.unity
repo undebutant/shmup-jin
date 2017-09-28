@@ -140,6 +140,11 @@ MonoBehaviour:
   dynamicObjectsBase: {fileID: 1598953600587194, guid: 9e68935f8ea6b654c8691f0393a40a2b,
     type: 2}
   playerShip: {fileID: 1032832367773122, guid: 171556b6f1c390b4db4a83c5940cc266, type: 2}
+  enemyShip: {fileID: 1711381063870056, guid: 790becc3ac238c84d87874e9a69e361f, type: 2}
+  minTimeBeforeEnemySpawn: 0.5
+  maxTimeBeforeEnemySpawn: 1.5
+  minYUnderZero: -8.3
+  maxYAboveZero: 8.3
 --- !u!4 &342579849
 Transform:
   m_ObjectHideFlags: 0

@@ -7,19 +7,52 @@ public sealed class ManagerOfGame : MonoBehaviour
 
     [Tooltip("The scenery as background of the game")]
     [SerializeField]
-    private GameObject gameScenery;
+    private GameObject gameScenery = null;
 
 
     [Tooltip("The base GameObject for all the dynamics objects")]
     [SerializeField]
-    private GameObject dynamicObjectsBase;
+    private GameObject dynamicObjectsBase = null;
 
 
     [Tooltip("The player to create when the game is starting")]
     [SerializeField]
-    private GameObject playerShip;
+    private GameObject playerShip = null;
 
 
+    [Tooltip("The enemy ship to create during the game")]
+    [SerializeField]
+    private GameObject enemyShip = null;
+
+
+    [Tooltip("The minimum time between two following spawning enemies")]
+    [SerializeField]
+    private float minTimeBeforeEnemySpawn = 1;
+
+
+    [Tooltip("The maximum time between two following spawning enemies")]
+    [SerializeField]
+    private float maxTimeBeforeEnemySpawn = 3;
+
+
+    [Tooltip("The minimum value possible to assign as reference position for a new enemy spawning")]
+    [SerializeField]
+    private float minYUnderZero = -8.3f;
+
+
+    [Tooltip("The minimum value possible to assign as reference position for a new enemy spawning")]
+    [SerializeField]
+    private float maxYAboveZero = 8.3f;
+
+
+    // Storing the base dynamic object once created, for enemy spawning in the good place of the hierarchy
+    GameObject baseDynamicObjects;
+
+
+    // The remaining time before the next enemy spawn
+    private float remainingTimeBeforeEnemySpawn = 0f;
+    
+    
     // Defining a unique instance of the gameManager
     private static ManagerOfGame instance = null;
 
@@ -61,12 +94,24 @@ public sealed class ManagerOfGame : MonoBehaviour
         if (!IsGameOn) {
             // Creating the basic hierarchy of the project ingame
             Instantiate(gameScenery);
-            GameObject baseDynamicObjects = Instantiate(dynamicObjectsBase);
+            baseDynamicObjects = Instantiate(dynamicObjectsBase);
 
             // Adding the player's ship
-            Instantiate(playerShip, baseDynamicObjects.transform);
+            Instantiate(playerShip, baseDynamicObjects.transform, true);
 
             IsGameOn = true;
+        }
+        else {
+            if(remainingTimeBeforeEnemySpawn > 0) {
+                remainingTimeBeforeEnemySpawn -= Time.deltaTime;
+            }
+            else {
+                Instantiate(enemyShip, baseDynamicObjects.transform.position + new Vector3(0f, Random.Range(minYUnderZero, maxYAboveZero)),
+                    baseDynamicObjects.transform.rotation, baseDynamicObjects.transform);
+
+                // Resetting the counter using random
+                remainingTimeBeforeEnemySpawn = Random.Range(minTimeBeforeEnemySpawn, maxTimeBeforeEnemySpawn);
+            }
         }
     }
 }
