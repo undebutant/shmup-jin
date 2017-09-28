@@ -9,33 +9,45 @@ public class InputController : MonoBehaviour {
     private GameObject playerShip = null;
 
 
-    void Start () {
-        playerShip = GameObject.FindWithTag("Player");
-	}
+    // The game manager as reference to know whether the game is started or not
+    [SerializeField]
+    private ManagerOfGame gameManager;
 
 
 	void Update () {
-        // Fetching the input movement of the player
-        Vector2 playerMovements = new Vector2( Input.GetAxis("Horizontal"), Input.GetAxis("Vertical") );
-
-        // Handling the diagonal case, to keep a constant speed whatever the direction
-        if (playerMovements.x != 0 && playerMovements.y != 0) {
-            playerMovements /= 1.4142f;
+        if (!playerShip)
+        {
+            if (gameManager.IsGameOn)
+            {
+                playerShip = GameObject.FindWithTag("Player");
+            }
         }
+        else {
+            // Fetching the input movement of the player
+            Vector2 playerMovements = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
 
-        
-        // Fetching shot swap input from the player
-        bool isPlayerSwappingWeapon = Input.GetButtonDown("Fire2");
+            // Handling the diagonal case, to keep a constant speed whatever the direction
+            if (playerMovements.x != 0 && playerMovements.y != 0)
+            {
+                playerMovements /= 1.4142f;
+            }
 
 
-        // Calling fitting methods of the ship to send the player's commands
-        if(playerShip != null) {
-            // Handling movement of the player's ship
-            playerShip.GetComponent<Engines>().Speed = playerMovements;
+            // Fetching shot swap input from the player
+            bool isPlayerSwappingWeapon = Input.GetButtonDown("Fire2");
 
-            // Handling shoots from the player
-            if (Input.GetButton("Fire1")) {
-                playerShip.GetComponentInChildren<BulletGun>().Fire();
+
+            // Calling fitting methods of the ship to send the player's commands
+            if (playerShip != null)
+            {
+                // Handling movement of the player's ship
+                playerShip.GetComponent<Engines>().Speed = playerMovements;
+
+                // Handling shoots from the player
+                if (Input.GetButton("Fire1"))
+                {
+                    playerShip.GetComponentInChildren<BulletGun>().Fire();
+                }
             }
         }
     }
