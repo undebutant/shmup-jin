@@ -68,13 +68,17 @@ public class BulletGun : MonoBehaviour {
     }
 
 
-    public void Fire() {
+    public bool Fire() {
         // Shooting a new bullet if the gun is not on cooldown
         if(elapsedTimeAfterShot <= 0) {
             Bullet newBullet = Instantiate(shotFired, transform.position, transform.rotation);
             newBullet.Init(BulletDamage, BulletSpeed);
 
             elapsedTimeAfterShot = BulletSpawnCooldown;
+
+            return true;
         }
+
+        return false;
     }
 }
