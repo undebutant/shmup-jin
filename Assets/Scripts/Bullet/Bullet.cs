@@ -36,29 +36,22 @@ public class Bullet : MonoBehaviour {
     }
 
 
-    public virtual void UpdatePosition() {
-        // Calculating the travelled distance since the last frame
-        Vector3 newMovement = new Vector3(
-            Time.deltaTime * BulletSpeed.x,
-            Time.deltaTime * BulletSpeed.y,
-            0f
-            );
-
-        transform.position += newMovement;
-    }
+    // Virtual function to update the position of the bullet
+    public virtual void UpdatePosition() {}
 
 
-    public virtual void Init() {
-        BulletDamage = 0f;
-        BulletSpeed = new Vector2(0f, 0f);
-    }
+    // Init method called on start
+    public virtual void Init(float damage, Vector2 speed) {}
 
 
     void Update() {
         UpdatePosition();
 
-        // Whenever the sprite hit something and is no longer seeable
-        if (!GetComponent<SpriteRenderer>().isVisible) {
+        // Destroy the bullet whenever the sprite goes outside the playable area
+        if (transform.position.x < 0 || transform.position.y > 40) {
+            Destroy(this.gameObject);
+        }
+        else if(!GetComponent<SpriteRenderer>().enabled) {
             Destroy(this.gameObject);
         }
     }
