@@ -75,7 +75,6 @@ public class BulletGun : MonoBehaviour {
     float timeSinceLastBulletShot = 0f;
 
     // Energy UI manager script
-    [SerializeField]
     UIManager energyUIManager;
 
 

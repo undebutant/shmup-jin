@@ -35,7 +35,6 @@ public class HealthManager : MonoBehaviour {
 
 
     // Health UI manager script
-    [SerializeField]
     UIManager healthUIManager;
 
 
