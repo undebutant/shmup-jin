@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class BulletGun : MonoBehaviour {
 
+    [SerializeField]
+    BulletType typeOfBulletCreated;
+
+
+    [Tooltip("The bullet factory used to create and recycle bullets")]
+    [SerializeField]
+    BulletFactory bulletFactory;
+
+
     [Tooltip("The prefab type of ammunition shot by the bullet gun")]
     [SerializeField]
     private Bullet shotFired;
@@ -86,6 +95,8 @@ public class BulletGun : MonoBehaviour {
         if (this.tag == "PlayerBulletSpawner") {
             energyUIManager.EnergySliderUpdater(currentEnergy / maxEnergy);
         }
+
+        bulletFactory = GameObject.FindGameObjectWithTag("BulletFactory").GetComponent<BulletFactory>();
     }
 
 
@@ -132,8 +143,7 @@ public class BulletGun : MonoBehaviour {
             timeSinceLastBulletShot = 0f;
 
             // Creating the bullet
-            Bullet newBullet = Instantiate(shotFired, transform.position, transform.rotation);
-            newBullet.Init(BulletDamage, BulletSpeed);
+            bulletFactory.SendBullet(BulletDamage, BulletSpeed, typeOfBulletCreated, transform.position);
 
             // Resetting the timer to create a cooldown between shots
             remainingTimeAfterShot = BulletSpawnCooldown;

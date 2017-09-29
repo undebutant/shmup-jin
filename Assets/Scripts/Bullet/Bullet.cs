@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
 
+    public BulletType typeOfBullet;
+
+
     // The damage inflicted by this bullet
     [SerializeField]
     private float damageInflicted;
@@ -41,5 +44,5 @@ public class Bullet : MonoBehaviour {
 
 
     // Init method called on start
-    public virtual void Init(float damage, Vector2 speed) {}
+    public virtual void Init(float damage, Vector2 speed, BulletType typeBulletToInit, Vector3 startingPosition) {}
 }

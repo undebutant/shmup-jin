@@ -13,6 +13,7 @@ TagManager:
   - energySliderBackground
   - UI
   - PlayerBulletSpawner
+  - BulletFactory
   layers:
   - Default
   - TransparentFX

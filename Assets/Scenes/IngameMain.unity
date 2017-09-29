@@ -289,7 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScenery: {fileID: 1940672807385926, guid: bba654e9ac6cd0045aece48887ebe911,
     type: 2}
-  dynamicObjectsBase: {fileID: 1598953600587194, guid: 9e68935f8ea6b654c8691f0393a40a2b,
+  dynamicObjectsBase: {fileID: 1859629385528550, guid: 9e68935f8ea6b654c8691f0393a40a2b,
     type: 2}
   playerShip: {fileID: 1484903400516126, guid: 171556b6f1c390b4db4a83c5940cc266, type: 2}
   enemyShip: {fileID: 1717640787773786, guid: 790becc3ac238c84d87874e9a69e361f, type: 2}

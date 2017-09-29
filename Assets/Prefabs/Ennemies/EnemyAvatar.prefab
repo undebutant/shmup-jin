@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c60ecb4a50ff724199046367067622e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfBulletCreated: 1
+  bulletFactory: {fileID: 0}
   shotFired: {fileID: 114908926440506036, guid: c74f89a0ea006cd43967331b8474c97c,
     type: 2}
   damageInflicted: 10

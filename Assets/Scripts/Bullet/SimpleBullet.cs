@@ -15,9 +15,11 @@ public class SimpleBullet : Bullet {
         transform.position += newMovement;
     }
 
-    public override void Init(float damage, Vector2 speed) {
+    public override void Init(float damage, Vector2 speed, BulletType typeBulletToInit, Vector3 startingPosition) {
         BulletDamage = damage;
         BulletSpeed = speed;
+        typeOfBullet = typeBulletToInit;
+        transform.position = startingPosition;
     }
 
     void Update() {
