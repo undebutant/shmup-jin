@@ -81,9 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a566b847ae31b2479f33a1c7295dc82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotFiredEnemy: {fileID: 114908926440506036, guid: c74f89a0ea006cd43967331b8474c97c,
+  shotFiredEnemy: {fileID: 1988943276984174, guid: c74f89a0ea006cd43967331b8474c97c,
     type: 2}
-  shotFiredPlayer: {fileID: 114867793660288000, guid: 124920e1986d51e49b6c5ead2c0ade04,
+  shotFiredPlayer: {fileID: 1866039325630956, guid: 124920e1986d51e49b6c5ead2c0ade04,
     type: 2}
 --- !u!114 &114586194009736606
 MonoBehaviour:

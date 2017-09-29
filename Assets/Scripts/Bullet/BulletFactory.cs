@@ -13,27 +13,27 @@ public class BulletFactory : MonoBehaviour {
 
     [Tooltip("The prefab type of ammunition to create in the factory")]
     [SerializeField]
-    private Bullet shotFiredEnemy;
+    private GameObject shotFiredEnemy;
 
 
     [Tooltip("The prefab type of ammunition to create in the factory")]
     [SerializeField]
-    private Bullet shotFiredPlayer;
+    private GameObject shotFiredPlayer;
 
 
     // Defining the list to store unused bullets
-    private List<Bullet> playerBulletStored;
-    private List<Bullet> enemyBulletStored;
+    private List<GameObject> playerBulletStored;
+    private List<GameObject> enemyBulletStored;
 
 
     private void Start() {
-        playerBulletStored = new List<Bullet>();
-        enemyBulletStored = new List<Bullet>();
+        playerBulletStored = new List<GameObject>();
+        enemyBulletStored = new List<GameObject>();
     }
 
 
     private void CreateBullet(BulletType typeBulletToCreate) {
-        Bullet newBulletCreated;
+        GameObject newBulletCreated;
 
         switch (typeBulletToCreate) {
             case BulletType.player:
@@ -58,50 +58,57 @@ public class BulletFactory : MonoBehaviour {
     }
 
 
-    public Bullet SendBullet(float bulletDamage, Vector2 bulletSpeed, BulletType typeBulletToCreate, Vector3 position) {
-        Bullet bulletToSend = null;
+    public void SendBullet(float bulletDamage, Vector2 bulletSpeed, BulletType typeBulletToCreate, Vector3 position) {
+        GameObject bulletToSend = null;
+        int sizeBulletList;
 
         switch (typeBulletToCreate){
             case BulletType.player:
+                sizeBulletList = playerBulletStored.Count;
+
                 // If the storage is empty at the given moment
-                if(playerBulletStored.Count == 0) {
+                if (sizeBulletList == 0) {
                     CreateBullet(typeBulletToCreate);
+                    sizeBulletList++;
                 }
 
                 // Popping the bullet from the storage
-                bulletToSend = playerBulletStored[0];
-                playerBulletStored.RemoveAt(0);
+                bulletToSend = playerBulletStored[sizeBulletList - 1];
+                playerBulletStored.RemoveAt(sizeBulletList - 1);
 
                 // Initialize correctly the bullet
-                bulletToSend.Init(bulletDamage, bulletSpeed, typeBulletToCreate, position);
+                bulletToSend.GetComponent<SimpleBullet>().Init(bulletDamage, bulletSpeed, typeBulletToCreate, position);
                 bulletToSend.gameObject.SetActive(true);
 
-                return bulletToSend;
+                break;
             
             case BulletType.enemy:
+                sizeBulletList = enemyBulletStored.Count;
+
                 // If the storage is empty at the given moment
-                if (enemyBulletStored.Count == 0) {
+                if (sizeBulletList == 0) {
                     CreateBullet(typeBulletToCreate);
+                    sizeBulletList++;
                 }
 
                 // Popping the bullet from the storage
-                bulletToSend = enemyBulletStored[0];
-                enemyBulletStored.RemoveAt(0);
+                bulletToSend = enemyBulletStored[sizeBulletList - 1];
+                enemyBulletStored.RemoveAt(sizeBulletList - 1);
 
                 // Initialize correctly the bullet
-                bulletToSend.Init(bulletDamage, bulletSpeed, typeBulletToCreate, position);
+                bulletToSend.GetComponent<SimpleBullet>().Init(bulletDamage, bulletSpeed, typeBulletToCreate, position);
                 bulletToSend.gameObject.SetActive(true);
 
-                return bulletToSend;
+                break;
             
             default:
-                return null;
+                return;
         }
     }
 
 
-    public void GetBulletBack(Bullet bulletToRecycle) {
-        switch (bulletToRecycle.typeOfBullet) {
+    public void GetBulletBack(GameObject bulletToRecycle) {
+        switch (bulletToRecycle.GetComponent<SimpleBullet>().typeOfBullet) {
             case BulletType.player:
                 // Resetting the position
                 bulletToRecycle.transform.position = new Vector3(60f, 0f);

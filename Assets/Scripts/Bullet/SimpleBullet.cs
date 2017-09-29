@@ -30,7 +30,7 @@ public class SimpleBullet : Bullet {
         if (collision.CompareTag("Player") || collision.CompareTag("Enemy"))
         {
             collision.GetComponent<HealthManager>().TakeDamage(BulletDamage);
-            Destroy(this.gameObject);
+            GameObject.FindGameObjectWithTag("BulletFactory").GetComponent<BulletFactory>().GetBulletBack(this.gameObject);
         }
     }
 }

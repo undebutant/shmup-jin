@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114908926440506036}
   m_Layer: 8
   m_Name: EnemyBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c598d94bb9a84424785cf98487ddcd5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfBullet: 0
   damageInflicted: 0
   speed: {x: 0, y: 0}
 --- !u!212 &212910040922250898
