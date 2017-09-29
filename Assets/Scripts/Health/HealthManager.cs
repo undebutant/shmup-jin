@@ -34,8 +34,18 @@ public class HealthManager : MonoBehaviour {
     }
 
 
+    // Health UI manager script
+    [SerializeField]
+    UIManager healthUIManager;
+
+
     public void TakeDamage(float damageTaken) {
         Health -= damageTaken;
+
+        // Updating the UI slider
+        if (this.tag == "Player") {
+            healthUIManager.HealthSliderUpdater(currentHealth / maxHealth);
+        }
 
         if (Health <= 0) {
             Die();
@@ -49,5 +59,11 @@ public class HealthManager : MonoBehaviour {
 
     void Start() {
         Health = MaxHealth;
+        healthUIManager = GameObject.FindWithTag("UI").GetComponent<UIManager>();
+
+        // Updating the UI slider
+        if (this.tag == "Player") {
+            healthUIManager.HealthSliderUpdater(currentHealth / maxHealth);
+        }
     }
 }

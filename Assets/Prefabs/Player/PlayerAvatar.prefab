@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114843228938559494}
   m_Layer: 10
   m_Name: PlayerBulletSpawner
-  m_TagString: Untagged
+  m_TagString: PlayerBulletSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,6 +170,7 @@ MonoBehaviour:
   damageInflicted: 10
   speed: {x: 20, y: 0}
   cooldown: 0.1
+  energyUIManager: {fileID: 0}
 --- !u!114 &114913469338259074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,8 +182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f9eb3981be2ef54782cb20ad9f56c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 100
   currentHealth: 0
+  healthUIManager: {fileID: 0}
 --- !u!212 &212479362606371466
 SpriteRenderer:
   m_ObjectHideFlags: 1

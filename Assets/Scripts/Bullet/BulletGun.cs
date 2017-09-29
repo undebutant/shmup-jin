@@ -63,7 +63,7 @@ public class BulletGun : MonoBehaviour {
     // The energy variables
     float maxEnergy = 100f;
     float currentEnergy = 100f;
-    float energyRegeneration = 20f;
+    float energyRegeneration = 30f;
 
     // Energy cost by shot
     float energyToShootInLine = 5f;
@@ -74,9 +74,19 @@ public class BulletGun : MonoBehaviour {
     // The timer used to detect when the player isn't shooting
     float timeSinceLastBulletShot = 0f;
 
+    // Energy UI manager script
+    [SerializeField]
+    UIManager energyUIManager;
+
 
     private void Start() {
         currentEnergy = maxEnergy;
+        energyUIManager = GameObject.FindWithTag("UI").GetComponent<UIManager>();
+
+        // Updating the UI slider
+        if (this.tag == "PlayerBulletSpawner") {
+            energyUIManager.EnergySliderUpdater(currentEnergy / maxEnergy);
+        }
     }
 
 
@@ -95,6 +105,11 @@ public class BulletGun : MonoBehaviour {
                 }
                 else {
                     currentEnergy = Mathf.Clamp(currentEnergy + energyRegeneration * Time.deltaTime * 0.75f, 0f, maxEnergy);
+                }
+
+                // Updating the UI slider
+                if (this.tag == "PlayerBulletSpawner") {
+                    energyUIManager.EnergySliderUpdater(currentEnergy / maxEnergy);
                 }
             }
         }
@@ -130,6 +145,11 @@ public class BulletGun : MonoBehaviour {
             // Checking if this last shot emptied the energy bar
             if(currentEnergy < 0) {
                 isShootingPossible = false;
+            }
+
+            // Updating the UI slider
+            if (this.tag == "PlayerBulletSpawner") {
+                energyUIManager.EnergySliderUpdater(currentEnergy / maxEnergy);
             }
 
             return true;

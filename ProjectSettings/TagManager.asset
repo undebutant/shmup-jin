@@ -5,6 +5,14 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - healthSlider
+  - healthSliderFill
+  - healthSliderBackground
+  - energySlider
+  - energySliderFill
+  - energySliderBackground
+  - UI
+  - PlayerBulletSpawner
   layers:
   - Default
   - TransparentFX

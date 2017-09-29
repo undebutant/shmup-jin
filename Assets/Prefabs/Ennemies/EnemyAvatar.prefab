@@ -162,7 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shotFired: {fileID: 114179813499782922, guid: c74f89a0ea006cd43967331b8474c97c,
     type: 2}
-  damageInflicted: 1
+  damageInflicted: 10
   speed: {x: -20, y: 0}
   cooldown: 0.1
 --- !u!114 &114354209251492674
