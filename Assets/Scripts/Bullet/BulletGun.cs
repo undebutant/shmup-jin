@@ -57,24 +57,80 @@ public class BulletGun : MonoBehaviour {
     }
 
 
-    private float elapsedTimeAfterShot = 0f;
+    private float remainingTimeAfterShot = 0f;
+
+
+    // The energy variables
+    float maxEnergy = 100f;
+    float currentEnergy = 100f;
+    float energyRegeneration = 20f;
+
+    // Energy cost by shot
+    float energyToShootInLine = 5f;
+
+    // Used when the gun is too low on energy
+    bool isShootingPossible = true;
+
+    // The timer used to detect when the player isn't shooting
+    float timeSinceLastBulletShot = 0f;
+
+
+    private void Start() {
+        currentEnergy = maxEnergy;
+    }
 
 
     private void Update() {
+        timeSinceLastBulletShot += Time.deltaTime;
+
         // Checking if the gun is on cooldown, and if so, decreasing it according to the elapsed time
-        if(elapsedTimeAfterShot > 0) {
-            elapsedTimeAfterShot -= Time.deltaTime;
+        if(remainingTimeAfterShot > 0) {
+            remainingTimeAfterShot -= Time.deltaTime;
+        }
+        else {
+            // Handling two different cases for enrgy regeneration
+            if (timeSinceLastBulletShot > BulletSpawnCooldown) {
+                if (isShootingPossible) {
+                    currentEnergy = Mathf.Clamp(currentEnergy + energyRegeneration * Time.deltaTime, 0f, maxEnergy);
+                }
+                else {
+                    currentEnergy = Mathf.Clamp(currentEnergy + energyRegeneration * Time.deltaTime * 0.75f, 0f, maxEnergy);
+                }
+            }
+        }
+
+        // Handling the case when the gun had no energy, and recharge fully
+        if(currentEnergy == 100) {
+            isShootingPossible = true;
         }
     }
 
 
     public bool Fire() {
+        // Test if the gun is on cooldown because the energy was too low
+        if (!isShootingPossible) {
+            return false;
+        }
+
         // Shooting a new bullet if the gun is not on cooldown
-        if(elapsedTimeAfterShot <= 0) {
+        if(remainingTimeAfterShot <= 0) {
+            // Signaling that the player started shooting again
+            timeSinceLastBulletShot = 0f;
+
+            // Creating the bullet
             Bullet newBullet = Instantiate(shotFired, transform.position, transform.rotation);
             newBullet.Init(BulletDamage, BulletSpeed);
 
-            elapsedTimeAfterShot = BulletSpawnCooldown;
+            // Resetting the timer to create a cooldown between shots
+            remainingTimeAfterShot = BulletSpawnCooldown;
+
+            // Decrementing the energy bar
+            currentEnergy -= energyToShootInLine;
+
+            // Checking if this last shot emptied the energy bar
+            if(currentEnergy < 0) {
+                isShootingPossible = false;
+            }
 
             return true;
         }

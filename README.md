@@ -8,7 +8,6 @@ See [this page](http://www.ensiie.fr/~guillaume.bouyer/JIN/GPFGEA/Schmup%202017-
 ## ToDo list ##
 
 Complete the specifications
-* Energy limitation
 * UI ingame
 * Event management in case of death
 
