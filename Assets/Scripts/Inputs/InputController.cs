@@ -34,7 +34,7 @@ public class InputController : MonoBehaviour {
 
 
             // Fetching shot swap input from the player
-            bool isPlayerSwappingWeapon = Input.GetButtonDown("Fire2");
+            //bool isPlayerSwappingWeapon = Input.GetButtonDown("Fire2");
 
 
             // Calling fitting methods of the ship to send the player's commands
