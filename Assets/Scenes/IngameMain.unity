@@ -287,12 +287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49af0901d33f6a94a803d4ae1a257273, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameScenery: {fileID: 1900440645025006, guid: bba654e9ac6cd0045aece48887ebe911,
+  gameScenery: {fileID: 1940672807385926, guid: bba654e9ac6cd0045aece48887ebe911,
     type: 2}
   dynamicObjectsBase: {fileID: 1598953600587194, guid: 9e68935f8ea6b654c8691f0393a40a2b,
     type: 2}
-  playerShip: {fileID: 1032832367773122, guid: 171556b6f1c390b4db4a83c5940cc266, type: 2}
-  enemyShip: {fileID: 1711381063870056, guid: 790becc3ac238c84d87874e9a69e361f, type: 2}
+  playerShip: {fileID: 1484903400516126, guid: 171556b6f1c390b4db4a83c5940cc266, type: 2}
+  enemyShip: {fileID: 1717640787773786, guid: 790becc3ac238c84d87874e9a69e361f, type: 2}
   minTimeBeforeEnemySpawn: 0.5
   maxTimeBeforeEnemySpawn: 1.5
   minYUnderZero: -8.3
